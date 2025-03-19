@@ -1,11 +1,15 @@
 import { useState } from 'react';
-
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Stack from 'react-bootstrap/Stack'
 
 function Square({ value, onSquareClick }) {
   return (
-    <button className="square" onClick={onSquareClick}>
+    <Button style={{ fontSize: '48px', padding: '0px', height: '100px', width: '100px' }} variant='outline-success' onClick={onSquareClick}>
       {value}
-    </button>
+    </Button>
   );
 }
 
@@ -33,22 +37,22 @@ function Board({ xIsNext, squares, onPlay }) {
 
   return (
     <>
-      <div classname="status">{status}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">  
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
+      <Row sm={1} className="status justify-content-center">{status}</Row>
+      <Stack direction='horizontal' gap={1} style={{ height: '100px', width: '320px' }}>
+         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+         <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+       </Stack>    
+       <Stack direction='horizontal' gap={1} style={{ height: '100px', width: '320px' }}>
+         <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+         <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+         <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+       </Stack>
+       <Stack direction='horizontal' gap={1} style={{ height: '100px', width: '320px' }}>
+         <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      </Stack>
     </>
   ); 
 }
@@ -69,7 +73,7 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  const moves = history.map((squares, move) => {
+  const moves = history.map((_squares, move) => {
     let description;
     if (move > 0) {
       description = 'Go to move #' + move;
@@ -77,21 +81,28 @@ export default function Game() {
       description = 'Go to game start';
     }
     return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
+      <div key={move}>
+        <Button variant='outline-success' onClick={() => jumpTo(move)}>{description}</Button>
+      </div>
     );
   });
 
   return (
-    <div classname="game">
-      <div classname="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div classname="game-info">
-        <ol>{moves}</ol>
-      </div>
-    </div>
+    <Container fluid="sm" className="d-flex flex-column align-items-center justify-content-center vh-100">
+      <Row className="w-100">
+        <Col className="d-flex justify-content-center">
+          <div className='text-center'>
+            <h1>Tic Tac Toe</h1>
+            <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+          </div>
+        </Col>
+        <Col className="d-flex flex-column align-items-center">
+          <div className="game-info">
+            <ol>{moves}</ol>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
@@ -114,3 +125,4 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
