@@ -1,3 +1,20 @@
+:root {
+  --gradient-bg-start: #667eea;
+  --gradient-bg-end: #764ba2;
+  --gradient-winner-start: #11998e;
+  --gradient-winner-end: #38ef7d;
+  --gradient-button-start: #f093fb;
+  --gradient-button-end: #f5576c;
+  --color-x: #667eea;
+  --color-o: #f093fb;
+  --color-white: #ffffff;
+  --shadow-base: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --border-radius-base: 12px;
+  --border-radius-large: 16px;
+  --border-radius-xl: 20px;
+}
+
 * {
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -7,7 +24,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--gradient-bg-start) 0%, var(--gradient-bg-end) 100%);
   min-height: 100vh;
 }
 
@@ -15,7 +32,7 @@ h1 {
   margin-top: 0;
   font-size: 3rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--color-white);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 2rem;
   letter-spacing: 2px;
@@ -79,11 +96,11 @@ ul {
   margin-bottom: 10px;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-white);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: var(--border-radius-base);
   backdrop-filter: blur(10px);
   min-height: 60px;
   display: flex;
@@ -100,14 +117,14 @@ ul {
   margin-left: 20px;
   background: rgba(255, 255, 255, 0.95);
   padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-elevated);
   max-height: 400px;
   overflow-y: auto;
 }
 
 .game-info h3 {
-  color: #667eea;
+  color: var(--color-x);
   margin-bottom: 1rem;
   font-size: 1.3rem;
 }
@@ -133,7 +150,7 @@ ul {
 }
 
 .game-info::-webkit-scrollbar-thumb {
-  background: #667eea;
+  background: var(--color-x);
   border-radius: 10px;
 }
 
@@ -153,7 +170,7 @@ ul {
 
 .status.winner {
   animation: pulse 1s ease-in-out infinite;
-  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  background: linear-gradient(135deg, var(--gradient-winner-start) 0%, var(--gradient-winner-end) 100%);
   color: white;
   font-size: 1.8rem;
 }
