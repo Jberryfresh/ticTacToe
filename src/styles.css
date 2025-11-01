@@ -1,16 +1,41 @@
+:root {
+  --gradient-bg-start: #667eea;
+  --gradient-bg-end: #764ba2;
+  --gradient-winner-start: #11998e;
+  --gradient-winner-end: #38ef7d;
+  --gradient-button-start: #f093fb;
+  --gradient-button-end: #f5576c;
+  --color-x: #667eea;
+  --color-o: #f093fb;
+  --color-white: #ffffff;
+  --shadow-base: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --border-radius-base: 12px;
+  --border-radius-large: 16px;
+  --border-radius-xl: 20px;
+}
+
 * {
   box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 body {
-  font-family: sans-serif;
-  margin: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
   padding: 0;
+  background: linear-gradient(135deg, var(--gradient-bg-start) 0%, var(--gradient-bg-end) 100%);
+  min-height: 100vh;
 }
 
 h1 {
   margin-top: 0;
-  font-size: 22px;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-white);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
 }
 
 h2 {
@@ -69,7 +94,20 @@ ul {
 
 .status {
   margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-white);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-base);
+  backdrop-filter: blur(10px);
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .game {
   display: flex;
   flex-direction: row;
@@ -77,4 +115,91 @@ ul {
 
 .game-info {
   margin-left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-elevated);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.game-info h3 {
+  color: var(--color-x);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.game-info ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.game-info ol li {
+  margin-bottom: 0.5rem;
+}
+
+/* Custom scrollbar for move history */
+.game-info::-webkit-scrollbar {
+  width: 8px;
+}
+
+.game-info::-webkit-scrollbar-track {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 10px;
+}
+
+.game-info::-webkit-scrollbar-thumb {
+  background: var(--color-x);
+  border-radius: 10px;
+}
+
+.game-info::-webkit-scrollbar-thumb:hover {
+  background: #5568d3;
+}
+
+/* Animation for winner announcement */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.status.winner {
+  animation: pulse 1s ease-in-out infinite;
+  background: linear-gradient(135deg, var(--gradient-winner-start) 0%, var(--gradient-winner-end) 100%);
+  color: white;
+  font-size: 1.8rem;
+}
+
+/* Square button hover effects */
+.square-button:not(:disabled):hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.square-button:disabled {
+  cursor: not-allowed !important;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .status {
+    font-size: 1.2rem;
+    padding: 0.75rem;
+  }
+  
+  .game-info {
+    margin-left: 0;
+    margin-top: 1rem;
+    width: 100%;
+  }
 }
